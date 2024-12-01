@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/component/Button/Custom.client.tsx"  ],
   "exclude": [
     "node_modules"
   ]

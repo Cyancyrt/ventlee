@@ -1,0 +1,29 @@
+* {
+  max-height: 100%;
+}
+html,
+body,
+main {
+  height: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease-in-out;
+}

@@ -20,7 +20,12 @@
     "@payloadcms/live-preview-react": "^3.0.2",
     "@payloadcms/next": "^3.0.2",
     "@payloadcms/payload-cloud": "^3.0.2",
+<<<<<<< HEAD
     "@payloadcms/richtext-lexical": "^3.0.2",
+=======
+    "@payloadcms/richtext-lexical": "latest",
+    "@payloadcms/richtext-slate": "^3.0.2",
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
     "@payloadcms/ui": "^3.0.2",
     "cross-env": "^7.0.3",
     "escape-html": "^1.0.3",

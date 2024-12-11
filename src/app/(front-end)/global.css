@@ -1,14 +1,23 @@
 * {
+<<<<<<< HEAD
   max-height: 100%;
 }
 html,
 body,
 main {
   height: 100vw;
+=======
+  max-height: 100vw;
+}
+html,
+body {
+  height: 100%;
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
   margin: 0;
   padding: 0;
 }
 
+<<<<<<< HEAD
 .card-title {
   font-size: 1.25rem;
   font-weight: bold;
@@ -26,4 +35,8 @@ main {
 .card:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
+=======
+body {
+  box-sizing: border-box;
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 }

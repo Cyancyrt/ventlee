@@ -1,12 +1,22 @@
 <<<<<<< HEAD
 # ventlee
+payload cms BASIC BLOG
 =======
-# blank
+# gw bingung jir kasih apa lagi
 
-blank
+npm init
+
+**install all depedency**
+npm i
+
+**run the program**
+npm run dev 
+
+localhost : 3000 (default)
+admin : /admin
 
 ## Attributes
 
-- **Database**: mongodb
+- **Database**: SQLite
 - **Storage Adapter**: localDisk
 >>>>>>> 43de725 (feat: initial commit)

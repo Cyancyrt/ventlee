@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+=======
+import { slateEditor } from '@payloadcms/richtext-slate'
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 import { CollectionConfig } from 'payload'
 import { generateSlug } from '@/component/hooks/formatSlug'
 import { revalidatePage } from '@/component/hooks/revalidatePage'
 import { Hero } from '@/block/Hero'
+<<<<<<< HEAD
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+=======
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 
 export const About: CollectionConfig = {
   slug: 'about',

@@ -4,7 +4,10 @@ import { GetAllGaleri } from '@/api/galeriHook'
 
 const Navbar = async () => {
   const FetchAbout = await GetAllAbout()
+<<<<<<< HEAD
 
+=======
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
   const FetchGaleri = await GetAllGaleri()
 
   return (
@@ -34,6 +37,7 @@ const Navbar = async () => {
                 About Us
               </a>
               <ul className="dropdown-menu">
+<<<<<<< HEAD
                 {FetchAbout.docs.map((About, index) => {
                   return (
                     <li key={index}>
@@ -43,6 +47,23 @@ const Navbar = async () => {
                     </li>
                   )
                 })}
+=======
+                <li>
+                  <a className="dropdown-item" href={`/About/${FetchAbout?.slug}`}>
+                    {FetchAbout?.title}
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Another action
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </li>
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
               </ul>
             </li>
             <li className="nav-item dropdown">
@@ -56,6 +77,7 @@ const Navbar = async () => {
                 Produk Kami
               </a>
               <ul className="dropdown-menu">
+<<<<<<< HEAD
                 {FetchGaleri.docs.map((Galeri, index) => {
                   return (
                     <li key={index}>
@@ -65,6 +87,13 @@ const Navbar = async () => {
                     </li>
                   )
                 })}
+=======
+                <li>
+                  <a className="dropdown-item" href={`/Galeri/${FetchGaleri?.slug}`}>
+                    {FetchGaleri?.title}
+                  </a>
+                </li>
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
                 <li>
                   <a className="dropdown-item" href="#">
                     Another action
@@ -78,8 +107,13 @@ const Navbar = async () => {
               </ul>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <a className="nav-link" href="/Blog">
                 Blog
+=======
+              <a className="nav-link" href="#contact">
+                Kontak
+>>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
               </a>
             </li>
           </ul>

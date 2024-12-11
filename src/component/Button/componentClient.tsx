@@ -1,28 +1,22 @@
 'use server'
-import React from 'react'
 
-type ClientFeatureProps = {
+import React from 'react'
+import { BaseClientFeatureProps } from '@payloadcms/richtext-lexical'
+
+export type ClientProps = BaseClientFeatureProps<{
   featureKey: string
   order: number
-}
+}>
 
-type FeatureComponentProps = ClientFeatureProps & {
-  clientFeatureProps?: ClientFeatureProps | null // Tambahkan props ini
-}
+const Button: React.FC<ClientProps> = (props) => {
+  console.log('Received props:', props) // Debug semua props yang diterima
+  const { featureKey, order } = props
 
-const HorizontalRuleComponent: React.FC<FeatureComponentProps> = ({
-  featureKey,
-  order,
-  clientFeatureProps = null, // Pastikan default-nya null jika tidak ada
-}) => {
   return (
-    <div className="horizontal-rule">
-      <span>Feature Key: {featureKey}</span>
-      <span>Order: {order}</span>
-      <span>Client Feature Props: {JSON.stringify(clientFeatureProps)}</span>
-      <hr />
-    </div>
+    <button>
+      Feature Key: {featureKey}, Order: {order}
+    </button>
   )
 }
 
-export default HorizontalRuleComponent
+export default Button

@@ -79,6 +79,7 @@ export const Post: CollectionConfig = {
         features: ({ defaultFeatures, rootFeatures }) => [
           ...defaultFeatures,
           FixedToolbarFeature(),
+          MyFeature(),
           LinkFeature({
             // Example showing how to customize the built-in fields
             // of the Link feature

@@ -8,7 +8,7 @@ import { HtmlRenderer } from '@/component/hooks/serialize'
 async function BlogPage({ params }) {
   const response = await GetOneBlog({ params })
   const blogData = response?.docs?.[0]
-
+  console.log(blogData)
   if (!blogData) return null
   return (
     <Fragment>

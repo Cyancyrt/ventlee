@@ -1,20 +1,13 @@
-import React from 'react'
-
-// MyNodeComponent will render the content of the node.
-
-export const MyNodeComponent: React.FC<any> = ({
-  nodeKey,
-  active,
-  anchorElem,
-  editor,
-  enabled,
-  item,
-}) => {
+const MyNodeComponent: FC<ComponentProps> = ({ props }) => {
+  console.log('Received props:', props)
   return (
-    <div className="my-node">
-      <p>This is a custom node with key: {nodeKey}</p>
+    <div
+      style={{
+        color: '#fff',
+      }}
+    >
+      test
     </div>
   )
 }
-
 export default MyNodeComponent

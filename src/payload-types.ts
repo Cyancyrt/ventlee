@@ -106,26 +106,13 @@ export interface Media {
 export interface About {
   id: number;
   title: string;
-<<<<<<< HEAD
   slug?: string | null;
   description: string;
-=======
-  slug: string;
-  description: {
-    [k: string]: unknown;
-  }[];
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
   image?: (number | null) | Media;
   layout?:
     | {
         title: string;
-<<<<<<< HEAD
         description: string;
-=======
-        description: {
-          [k: string]: unknown;
-        }[];
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
         image?: (number | null) | Media;
         id?: string | null;
         blockName?: string | null;
@@ -172,7 +159,6 @@ export interface Post {
   excerpt?: string | null;
   slug?: string | null;
   description: {
-<<<<<<< HEAD
     root: {
       type: string;
       children: {
@@ -197,12 +183,6 @@ export interface Post {
     | null;
   createdAt: string;
   updatedAt: string;
-=======
-    [k: string]: unknown;
-  }[];
-  updatedAt: string;
-  createdAt: string;
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -371,7 +351,6 @@ export interface PostsSelect<T extends boolean = true> {
   excerpt?: T;
   slug?: T;
   description?: T;
-<<<<<<< HEAD
   description_html?: T;
   image?: T;
   externalLinks?:
@@ -382,10 +361,6 @@ export interface PostsSelect<T extends boolean = true> {
       };
   createdAt?: T;
   updatedAt?: T;
-=======
-  updatedAt?: T;
-  createdAt?: T;
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

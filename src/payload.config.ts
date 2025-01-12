@@ -5,6 +5,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+// import image from '../public/assets/LOGO.png'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -17,16 +18,18 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    components: {
+      graphics: {
+        Icon: '/graphic/Icon/page.tsx#Icon',
+        Logo: '/graphic/Logo/page.tsx#Logo',
+      },
+    },
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
   collections: [Users, Media, About, Galeri, Post],
-<<<<<<< HEAD
-=======
-  editor: lexicalEditor(),
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

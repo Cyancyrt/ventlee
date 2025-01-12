@@ -44,15 +44,9 @@ export const Galeri: CollectionConfig = {
     {
       name: 'slug',
       type: 'text',
-<<<<<<< HEAD
       admin: {
         hidden: true,
       },
-=======
-      defaultValue: 'home',
-      index: true,
-      label: 'Slug',
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
     },
     {
       name: 'layout',

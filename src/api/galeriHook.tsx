@@ -10,18 +10,10 @@ export async function GetAllGaleri() {
     draft: true,
     limit: 1,
   })
-<<<<<<< HEAD
   if (pageRes === null) {
     return notFound()
   }
   return pageRes
-=======
-  const data = pageRes?.docs?.[0]
-  if (data === null) {
-    return notFound()
-  }
-  return data
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 }
 
 export async function GetOneGaleri({ params }) {

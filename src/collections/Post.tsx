@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { MyFeature } from '@/component/Button/Custom.server'
 import generateExcerpt from '@/component/hooks/formatExcerpt'
 import { generateSlug } from '@/component/hooks/formatSlug'
@@ -12,12 +11,6 @@ import {
   lexicalHTML,
   LinkFeature,
 } from '@payloadcms/richtext-lexical'
-=======
-import generateExcerpt from '@/component/hooks/formatExcerpt'
-import { generateSlug } from '@/component/hooks/formatSlug'
-import { revalidatePage } from '@/component/hooks/revalidatePage'
-import { slateEditor } from '@payloadcms/richtext-slate'
->>>>>>> daf8797404ba121d23117f869d8d4f414cf92e72
 import { CollectionConfig } from 'payload'
 
 export const Post: CollectionConfig = {
@@ -86,7 +79,6 @@ export const Post: CollectionConfig = {
         features: ({ defaultFeatures, rootFeatures }) => [
           ...defaultFeatures,
           FixedToolbarFeature(),
-          MyFeature(),
           LinkFeature({
             // Example showing how to customize the built-in fields
             // of the Link feature

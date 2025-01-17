@@ -107,17 +107,71 @@ export interface About {
   id: number;
   title: string;
   slug?: string | null;
-  description: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  description_html?: string | null;
   image?: (number | null) | Media;
   layout?:
-    | {
-        title: string;
-        description: string;
-        image?: (number | null) | Media;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'Hero';
-      }[]
+    | (
+        | {
+            title: string;
+            description: string;
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Hero';
+          }
+        | {
+            title: string;
+            description: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            description_html?: string | null;
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Super-Hero';
+          }
+        | {
+            uploads?:
+              | {
+                  uploadBlock: {
+                    image: number | Media;
+                    caption?: string | null;
+                  };
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'GaleriBlock';
+          }
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -130,20 +184,13 @@ export interface Galeri {
   id: number;
   title: string;
   slug?: string | null;
-  layout?:
+  uploads?:
     | {
-        uploads?:
-          | {
-              uploadBlock: {
-                image: number | Media;
-                caption?: string | null;
-              };
-              id?: string | null;
-            }[]
-          | null;
+        uploadBlock: {
+          image: number | Media;
+          caption?: string | null;
+        };
         id?: string | null;
-        blockName?: string | null;
-        blockType: 'GaleriBlock';
       }[]
     | null;
   updatedAt: string;
@@ -294,6 +341,7 @@ export interface AboutSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  description_html?: T;
   image?: T;
   layout?:
     | T
@@ -307,20 +355,16 @@ export interface AboutSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Galeri_select".
- */
-export interface GaleriSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  layout?:
-    | T
-    | {
+        'Super-Hero'?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              description_html?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
         GaleriBlock?:
           | T
           | {
@@ -338,6 +382,27 @@ export interface GaleriSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Galeri_select".
+ */
+export interface GaleriSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  uploads?:
+    | T
+    | {
+        uploadBlock?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

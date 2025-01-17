@@ -1,8 +1,3 @@
-import { CollectionConfig } from 'payload'
-import { generateSlug } from '@/component/hooks/formatSlug'
-import { revalidatePage } from '@/component/hooks/revalidatePage'
-import { Hero } from '@/block/Hero'
-import { Super_Hero } from '@/block/SuperHero'
 import {
   FixedToolbarFeature,
   HTMLConverterFeature,
@@ -10,54 +5,19 @@ import {
   lexicalHTML,
   LinkFeature,
 } from '@payloadcms/richtext-lexical'
-import GaleriBlock from '@/block/GaleriBlock'
+import { CollectionConfig } from 'payload'
 
-export const About: CollectionConfig = {
-  slug: 'about',
+export const Super_Hero: CollectionConfig = {
+  slug: 'Super-Hero',
   access: {
     read: () => true,
   },
-  hooks: {
-    afterChange: [revalidatePage],
-    beforeChange: [
-      ({ data, originalDoc }) => {
-        if (data) {
-          if (!data.title) {
-            data.title = ''
-          }
-        }
-        // Jika title berubah, update slug
-        if (data?.title && data?.title !== originalDoc?.title) {
-          data.slug = generateSlug(data.title) // Buat slug otomatis dari title yang baru
-        }
-        return data
-      },
-    ],
-  },
-  admin: {
-    defaultColumns: ['title', 'slug', 'image'],
-    livePreview: {
-      url: ({ data }) => {
-        const isHomePage = data.slug === 'home'
-        return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/About/${data.slug}` : ''}`
-      },
-    },
-
-    useAsTitle: 'title',
-  },
-
   fields: [
     {
       name: 'title',
+      label: 'Title',
       type: 'text',
       required: true,
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      admin: {
-        hidden: true,
-      },
     },
     {
       name: 'description',
@@ -118,12 +78,6 @@ export const About: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-    },
-    {
-      name: 'layout',
-      label: 'Layout',
-      type: 'blocks',
-      blocks: [Hero, Super_Hero, GaleriBlock],
     },
   ],
 }

@@ -3,8 +3,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import { notFound } from 'next/navigation'
-import TextSerial from '@/component/hooks/serialize'
 import Image from 'next/image'
+import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
 
 const AboutUs = async ({ params }) => {
   const payload = await getPayload({ config })
@@ -22,24 +22,27 @@ const AboutUs = async ({ params }) => {
   })
 
   const data = pageRes?.docs?.[0]
+  const layout = data?.layout
+  const image = data?.image
   if (data === null) {
     return notFound()
   }
 
   return (
-    <div>
-      <h1></h1>
-    </div>
-    // <Fragment>
-    //   <RefreshRouteOnSave />
-    //   <section id="about" className="about">
-    //     <h2>{data?.title}</h2>
-    //     {TextSerial(data?.description)}
-    //     {data?.image && (
-    //       <Image src={data?.image?.url} alt={data?.image?.alt} width={400} height={500} />
-    //     )}
-    //   </section>
-    // </Fragment>
+    <Fragment>
+      <RefreshRouteOnSave />
+      <section id="about" className="about">
+        <h2>{data?.title}</h2>
+        <HtmlRenderer htmlString={data?.description_html} />
+        {image && <Image src={image?.url} alt={image?.alt} width={400} height={500} />}
+        {layout &&
+          layout?.map((block, index) => (
+            <div key={index}>
+              <TextSerial nodes={[block]} />
+            </div>
+          ))}
+      </section>
+    </Fragment>
   )
 }
 

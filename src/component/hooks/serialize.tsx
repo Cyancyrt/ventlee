@@ -23,75 +23,88 @@ const cekFormat = (format: TextFormatType): string[] => {
 
   return activeFormats
 }
-function TextSerial(nodes) {
-  if (!Array.isArray(nodes)) return null // Pastikan nodes adalah array
+
+// Fungsi untuk memeriksa dan mengembalikan embed YouTube
+const YouTubeEmbed = (htmlString) => {
+  const hrefMatch = htmlString.match(/href="([^"]+youtube\.com\/embed\/[^"]+)"/)
+  if (hrefMatch) {
+    const youtubeUrl = hrefMatch[1] // URL YouTube dari grup regex
+    return (
+      <div className="youtube-embed">
+        <iframe
+          src={youtubeUrl}
+          title="YouTube Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    )
+  }
+  return null // Tidak ada embed YouTube
+}
+
+// Komponen utama HtmlRenderer
+export const HtmlRenderer = ({ htmlString }) => {
+  // Cek apakah YouTubeEmbed dapat merender sesuatu
+  const youtubeEmbed = YouTubeEmbed(htmlString)
+
+  // Jika ya, render YouTubeEmbed; jika tidak, render dangerouslySetInnerHTML
+  return youtubeEmbed || <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+}
+
+export function TextSerial({ nodes }: { nodes?: any[] }) {
+  // Safety check: Ensure nodes is always defined as an empty array if undefined
+  if (!nodes || !Array.isArray(nodes)) return null // Ensure nodes is an array and not undefined
 
   return nodes.map((node, index) => {
     if (!node) return null
-
-    // Jika node adalah teks (tidak memiliki `type`, hanya teks langsung)
-
-    if (!node.children) {
-      let content = (
-        <span
-          dangerouslySetInnerHTML={{
-            __html: escapeHTML(node.text),
-          }}
-        />
-      )
-      cekFormat(node.format).map((res) => {
-        if (res === 'bold') {
-          content = (
-            <strong className="text-red-500" key={index}>
-              {content}
-            </strong>
+    // Penanganan untuk blocktype spesifik
+    console.log(node)
+    if (node?.blockType) {
+      switch (node.blockType) {
+        case 'hero':
+          return (
+            <section key={index} className="hero">
+              <h1>{node.title}</h1>
+              <p>{node.subtitle}</p>
+              {node.image && <img src={node.image} alt={node.alt || 'Hero Image'} />}
+            </section>
           )
-        }
-        if (res === 'italic') content = <em key={index}>{content}</em>
-        if (res === 'code') content = <code key={index}>{content}</code>
-        if (res === 'underline') content = <u key={index}>{content}</u>
-        if (res === 'strikethrough') content = <del key={index}>{content}</del>
-        if (res === 'subscript') content = <sub key={index}>{content}</sub>
-      })
-      return <Fragment key={index}>{content}</Fragment>
-    }
 
-    // Jika node adalah elemen dengan `type`
-    switch (node.type) {
-      case 'paragraph':
-        return <p key={index}>{TextSerial(node.children)}</p>
-      case 'h1':
-        return <h1 key={index}>{TextSerial(node.children)}</h1>
-      case 'h2':
-        return <h2 key={index}>{TextSerial(node.children)}</h2>
-      case 'h3':
-        return <h3 key={index}>{TextSerial(node.children)}</h3>
-      case 'h4':
-        return <h4 key={index}>{TextSerial(node.children)}</h4>
-      case 'h5':
-        return <h5 key={index}>{TextSerial(node.children)}</h5>
-      case 'h6':
-        return <h6 key={index}>{TextSerial(node.children)}</h6>
-      case 'blockquote':
-        return <blockquote key={index}>{TextSerial(node.children)}</blockquote>
-      case 'ul':
-        return <ul key={index}>{TextSerial(node.children)}</ul>
-      case 'ol':
-        return <ol key={index}>{TextSerial(node.children)}</ol>
-      case 'li':
-        return <li key={index}>{TextSerial(node.children)}</li>
-      case 'link':
-        return (
-          <a href={escapeHTML(node.fields.url)} key={index}>
-            {TextSerial(node.children)}
-          </a>
-        )
-      default:
-        return <span key={index}>{TextSerial(node.children)}</span>
+        case 'Super-Hero':
+          return (
+            <section key={index} className="superhero">
+              <HtmlRenderer htmlString={node?.description_html} />
+            </section>
+          )
+
+        case 'GaleriBlock':
+          return (
+            <div key={index} className="galeri-blocks">
+              {node.uploads?.map((item, idx) => {
+                const image = item.uploadBlock?.image // Assign item.uploadBlock.image to a variable
+                return (
+                  <div key={idx} className="galeri-item">
+                    {image && (
+                      <img
+                        src={image.url}
+                        alt={image.alt || `Gallery Item ${idx + 1}`}
+                        style={{ width: '100px' }}
+                      />
+                    )}
+                    {image && <p>{image.caption}</p>}
+                  </div>
+                )
+              })}
+            </div>
+          )
+
+        default:
+          return <div key={index}>{`Unknown blocktype: ${node.blocktype}`}</div>
+      }
     }
+    // Default fallback untuk elemen yang tidak dikenal
+    return <span key={index}>{TextSerial(node)}</span>
   })
-}
-
-export const HtmlRenderer = ({ htmlString }) => {
-  return <div dangerouslySetInnerHTML={{ __html: htmlString }} />
 }

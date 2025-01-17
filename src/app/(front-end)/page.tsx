@@ -14,23 +14,18 @@ const FeaturedProducts = () => {
   ]
 
   return (
-    <div className="container-fluid mt-2">
-      <HeroSection />
-      <section id="products" className="py-5 bg-light">
-        <div className="container">
-          <h2 className="text-center mb-4">Produk Unggulan</h2>
-          <div className="row">
+    <div>
+      <section id="products">
+        <div>
+          <h2>Produk Unggulan</h2>
+          <div>
             {products.map((product) => (
-              <div key={product.id} className="col-md-4 mb-4">
-                <div className="card">
-                  <img src={product.img} className="card-img-top" alt={product.name} />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">{product.price}</p>
-                    <a href="#" className="btn btn-primary">
-                      Detail
-                    </a>
-                  </div>
+              <div key={product.id}>
+                <img src={product.img} alt={product.name} />
+                <div>
+                  <h5>{product.name}</h5>
+                  <p>{product.price}</p>
+                  <a href="#">Detail</a>
                 </div>
               </div>
             ))}

@@ -23,7 +23,7 @@ export async function GetOneBlog({ params }) {
   const pageRes = await payload.find({
     collection: 'posts',
     draft: true,
-    limit: 1,
+    limit: 15,
     where: {
       slug: {
         equals: slug,

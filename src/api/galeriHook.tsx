@@ -1,3 +1,4 @@
+
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound } from 'next/navigation'
@@ -8,7 +9,7 @@ export async function GetAllGaleri() {
   const pageRes = await payload.find({
     collection: 'Galeri',
     draft: true,
-    limit: 1,
+    limit: 5,
   })
   if (pageRes === null) {
     return notFound()

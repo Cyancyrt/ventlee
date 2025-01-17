@@ -1,10 +1,7 @@
-import { MyFeature } from '@/component/Button/Custom.server'
 import generateExcerpt from '@/component/hooks/formatExcerpt'
 import { generateSlug } from '@/component/hooks/formatSlug'
 import { revalidatePage } from '@/component/hooks/revalidatePage'
 import {
-  BoldFeature,
-  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HTMLConverterFeature,
   lexicalEditor,

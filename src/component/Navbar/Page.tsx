@@ -64,14 +64,27 @@ const Navbar = async () => {
                 </li>
               </ul>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Testimoni
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a className="dropdown-item" href={'/Testimoni'}>
+                    Komentar
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href={'/Blog'}>
                 Blog
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href={'/Testimoni'}>
-                Testimoni
               </a>
             </li>
           </ul>

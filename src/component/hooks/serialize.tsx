@@ -2,26 +2,29 @@ import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import { TextFormatType } from '@payloadcms/richtext-lexical/lexical'
 
-const cekFormat = (format: TextFormatType): string[] => {
-  const formatMapping: Record<string, number> = {
-    bold: 1 << 0,
-    italic: 1 << 1,
-    strikethrough: 1 << 2,
-    underline: 1 << 3,
-    subscript: 1 << 4,
-    superscript: 1 << 5,
-    code: 1 << 6,
+export function getLastUpdated(updatedAt: string | undefined): string {
+  if (!updatedAt) return 'Tanggal tidak tersedia'
+
+  const updatedDate = new Date(updatedAt)
+  const now = new Date()
+  const diff = now.getTime() - updatedDate.getTime() // Selisih dalam milidetik
+
+  if (isNaN(diff)) return 'Tanggal tidak valid'
+
+  const seconds = Math.floor(diff / 1000)
+  const minutes = Math.floor(seconds / 60)
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(hours / 24)
+
+  if (days > 0) {
+    return `${days} hari yang lalu`
+  } else if (hours > 0) {
+    return `${hours} jam yang lalu`
+  } else if (minutes > 0) {
+    return `${minutes} menit yang lalu`
+  } else {
+    return `${seconds} detik yang lalu`
   }
-
-  const activeFormats: string[] = []
-
-  for (const [key, value] of Object.entries(formatMapping)) {
-    if ((format & value) === value) {
-      activeFormats.push(key)
-    }
-  }
-
-  return activeFormats
 }
 
 // Fungsi untuk memeriksa dan mengembalikan embed YouTube

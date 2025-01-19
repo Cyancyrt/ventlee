@@ -8,7 +8,6 @@ import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
 async function BlogPage({ params }) {
   const response = await GetOneTestimoni({ params })
   const layout = response?.layout
-  console.log(response)
   if (!response) return null
   return (
     <Fragment>

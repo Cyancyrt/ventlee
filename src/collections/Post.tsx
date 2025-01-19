@@ -46,13 +46,49 @@ export const Post: CollectionConfig = {
         const isHomePage = data.slug === 'home'
         if (data.contentType === 'post')
           return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Blog/${data.slug}` : ''}`
-        return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Testimoni/${data.slug}` : ''}`
+        return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Testimoni` : ''}`
+
+        //ini kalo butuh yang detail testimoni
+        // return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Testimoni/${data.slug}` : ''}`
       },
     },
 
     useAsTitle: 'title',
   },
   fields: [
+    {
+      name: 'Header',
+      label: 'Image Header',
+      type: 'array',
+      maxRows: 1,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          upload: {
+            imageSizes: [
+              {
+                name: 'small',
+                fit: 'cover',
+                height: 300,
+                width: 900,
+              },
+              {
+                name: 'large',
+                fit: 'cover',
+                height: 600,
+                width: 1800,
+              },
+            ],
+            limits: {
+              fileSize: 5000000,
+            },
+          },
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
     {
       name: 'title',
       type: 'text',

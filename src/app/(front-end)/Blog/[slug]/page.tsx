@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { GetOneBlog } from '@/api/blogHook'
 
 import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
+import PostNextPrev from '../prevAndNextPost'
 
 async function BlogPage({ params }) {
   const response = await GetOneBlog({ params })
@@ -51,6 +52,7 @@ async function BlogPage({ params }) {
           </aside>
         )}
       </section>
+      <PostNextPrev slug={response?.slug} />
     </Fragment>
   )
 }

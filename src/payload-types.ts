@@ -203,6 +203,12 @@ export interface Galeri {
  */
 export interface Post {
   id: number;
+  Header?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   title: string;
   contentType?: ('post' | 'testimoni') | null;
   excerpt?: string | null;
@@ -459,6 +465,12 @@ export interface GaleriSelect<T extends boolean = true> {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  Header?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   title?: T;
   contentType?: T;
   excerpt?: T;

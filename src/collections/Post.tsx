@@ -1,3 +1,6 @@
+import GaleriBlock from '@/block/GaleriBlock'
+import { Hero } from '@/block/Hero'
+import { Super_Hero } from '@/block/SuperHero'
 import generateExcerpt from '@/component/hooks/formatExcerpt'
 import { generateSlug } from '@/component/hooks/formatSlug'
 import { revalidatePage } from '@/component/hooks/revalidatePage'
@@ -37,11 +40,13 @@ export const Post: CollectionConfig = {
     ],
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'image'],
+    defaultColumns: ['title', 'slug', 'image', 'contentType'],
     livePreview: {
       url: ({ data }) => {
         const isHomePage = data.slug === 'home'
-        return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/About/${data.slug}` : ''}`
+        if (data.contentType === 'post')
+          return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Blog/${data.slug}` : ''}`
+        return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/Testimoni/${data.slug}` : ''}`
       },
     },
 
@@ -53,6 +58,22 @@ export const Post: CollectionConfig = {
       type: 'text',
       defaultValue: 'Ketik disini ya',
       required: true,
+    },
+    {
+      name: 'contentType',
+      label: 'Content Type',
+      type: 'select',
+      options: [
+        {
+          label: 'Post',
+          value: 'post',
+        },
+        {
+          label: 'Testimoni',
+          value: 'testimoni',
+        },
+      ],
+      defaultValue: 'post',
     },
     {
       name: 'excerpt',
@@ -132,24 +153,13 @@ export const Post: CollectionConfig = {
       },
     },
     {
-      name: 'externalLinks',
-      type: 'array', // Menggunakan array untuk memungkinkan banyak entri
-      label: 'External Links',
-      labels: {
-        singular: 'External Link', // Label untuk satu entri
-        plural: 'External Links', // Label untuk banyak entri
-      },
-      fields: [
-        {
-          name: 'url',
-          type: 'text', // Tipe field untuk menyimpan URL
-          label: 'URL',
-        },
-      ],
+      name: 'layout',
+      label: 'Layout',
+      type: 'blocks',
       admin: {
-        position: 'sidebar', // Menempatkan seluruh array di sidebar
-        description: 'Tambahkan satu atau lebih tautan eksternal.',
+        position: 'sidebar',
       },
+      blocks: [Hero, Super_Hero, GaleriBlock],
     },
     {
       name: 'createdAt',

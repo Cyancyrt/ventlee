@@ -53,20 +53,25 @@ const Navbar = async () => {
                 Produk Kami
               </a>
               <ul className="dropdown-menu">
-                {FetchGaleri.docs.map((Galeri, index) => {
-                  return (
-                    <li key={index}>
-                      <a className="dropdown-item" href={`/Galeri/${Galeri?.slug}`}>
+                <li>
+                  {FetchGaleri.docs.map((Galeri, index) => {
+                    return (
+                      <a className="dropdown-item" key={index} href={`/Galeri/${Galeri?.slug}`}>
                         {Galeri?.title}
                       </a>
-                    </li>
-                  )
-                })}
+                    )
+                  })}
+                </li>
               </ul>
             </li>
             <li className="nav-item">
               <a className="nav-link" href={'/Blog'}>
                 Blog
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href={'/Testimoni'}>
+                Testimoni
               </a>
             </li>
           </ul>

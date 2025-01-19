@@ -1,11 +1,11 @@
 import { GetAllBlog } from '@/api/blogHook'
 import React from 'react'
 
-async function BlogPage() {
+async function TestimoniPage() {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'post'
-  const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'post')
+  const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'testimoni')
 
   return (
     <div className="container mt-5">
@@ -17,7 +17,7 @@ async function BlogPage() {
               <div className="card-body">
                 <h5 className="card-title">{res?.title}</h5>
                 <p className="card-text">{res?.excerpt}</p>
-                <a href={`/Blog/${res?.slug}`} className="btn btn-primary">
+                <a href={`/Testimoni/${res?.slug}`} className="btn btn-primary">
                   Go somewhere
                 </a>
               </div>
@@ -32,4 +32,4 @@ async function BlogPage() {
   )
 }
 
-export default BlogPage
+export default TestimoniPage

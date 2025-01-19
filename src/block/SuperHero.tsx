@@ -14,11 +14,18 @@ export const Super_Hero: CollectionConfig = {
   },
   fields: [
     {
+      name: 'IsSideBar',
+      label: 'Side Content',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+    {
       name: 'title',
       label: 'Title',
       type: 'text',
       required: true,
     },
+
     {
       name: 'description',
       type: 'richText',
@@ -73,6 +80,7 @@ export const Super_Hero: CollectionConfig = {
         ],
       }),
     },
+
     lexicalHTML('description', { name: 'description_html' }),
     {
       name: 'image',

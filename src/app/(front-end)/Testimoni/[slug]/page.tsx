@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import Image from 'next/image'
-import { GetOneBlog } from '@/api/blogHook'
+import { GetOneTestimoni } from '@/api/blogHook'
 
 import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
 
 async function BlogPage({ params }) {
-  const response = await GetOneBlog({ params })
+  const response = await GetOneTestimoni({ params })
   const layout = response?.layout
+  console.log(response)
   if (!response) return null
   return (
     <Fragment>

@@ -26,7 +26,7 @@ const cekFormat = (format: TextFormatType): string[] => {
 
 // Fungsi untuk memeriksa dan mengembalikan embed YouTube
 const YouTubeEmbed = (htmlString) => {
-  const hrefMatch = htmlString.match(/href="([^"]+youtube\.com\/embed\/[^"]+)"/)
+  const hrefMatch = htmlString?.match(/href="([^"]+youtube\.com\/embed\/[^"]+)"/)
   if (hrefMatch) {
     const youtubeUrl = hrefMatch[1] // URL YouTube dari grup regex
     return (
@@ -60,7 +60,6 @@ export function TextSerial({ nodes }: { nodes?: any[] }) {
   return nodes.map((node, index) => {
     if (!node) return null
     // Penanganan untuk blocktype spesifik
-    console.log(node)
     if (node?.blockType) {
       switch (node.blockType) {
         case 'hero':
@@ -104,6 +103,7 @@ export function TextSerial({ nodes }: { nodes?: any[] }) {
           return <div key={index}>{`Unknown blocktype: ${node.blocktype}`}</div>
       }
     }
+
     // Default fallback untuk elemen yang tidak dikenal
     return <span key={index}>{TextSerial(node)}</span>
   })

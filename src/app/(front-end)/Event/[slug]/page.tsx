@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react'
-import { RefreshRouteOnSave } from '../../Blog/[slug]/RefreshRouteOnSave'
+import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import Image from 'next/image'
-import { GetOneAbout } from '@/api/blogHook'
+import { GetOneEvent, GetOneTestimoni } from '@/api/blogHook'
 
 import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
-import PostNextPrev from '../../Blog/prevAndNextPost'
 
 async function BlogPage({ params }) {
-  const response = await GetOneAbout({ params })
+  const response = await GetOneEvent({ params })
   const layout = response?.layout
   if (!response) return null
   return (
@@ -52,7 +51,6 @@ async function BlogPage({ params }) {
           </aside>
         )}
       </section>
-      <PostNextPrev slug={response?.slug} />
     </Fragment>
   )
 }

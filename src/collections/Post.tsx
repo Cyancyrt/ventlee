@@ -98,18 +98,8 @@ export const Post: CollectionConfig = {
     {
       name: 'contentType',
       label: 'Content Type',
-      type: 'select',
-      options: [
-        {
-          label: 'Post',
-          value: 'post',
-        },
-        {
-          label: 'Testimoni',
-          value: 'testimoni',
-        },
-      ],
-      defaultValue: 'post',
+      type: 'relationship',
+      relationTo: 'category',
     },
     {
       name: 'excerpt',

@@ -13,7 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    about: About;
+    category: Category;
     Galeri: Galeri;
     posts: Post;
     'payload-locked-documents': PayloadLockedDocument;
@@ -24,7 +24,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    about: AboutSelect<false> | AboutSelect<true>;
+    category: CategorySelect<false> | CategorySelect<true>;
     Galeri: GaleriSelect<false> | GaleriSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -101,79 +101,13 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about".
+ * via the `definition` "category".
  */
-export interface About {
+export interface Category {
   id: number;
   title: string;
   slug?: string | null;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  description_html?: string | null;
-  image?: (number | null) | Media;
-  layout?:
-    | (
-        | {
-            title: string;
-            description: string;
-            image?: (number | null) | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Hero';
-          }
-        | {
-            IsSideBar?: boolean | null;
-            title: string;
-            description: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            description_html?: string | null;
-            image?: (number | null) | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Super-Hero';
-          }
-        | {
-            uploads?:
-              | {
-                  uploadBlock: {
-                    image: number | Media;
-                    caption?: string | null;
-                  };
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'GaleriBlock';
-          }
-      )[]
-    | null;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -210,7 +144,7 @@ export interface Post {
       }[]
     | null;
   title: string;
-  contentType?: ('post' | 'testimoni') | null;
+  contentType?: (number | null) | Category;
   excerpt?: string | null;
   slug?: string | null;
   description: {
@@ -299,8 +233,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'about';
-        value: number | About;
+        relationTo: 'category';
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'Galeri';
@@ -387,55 +321,12 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about_select".
+ * via the `definition` "category_select".
  */
-export interface AboutSelect<T extends boolean = true> {
+export interface CategorySelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
-  description_html?: T;
-  image?: T;
-  layout?:
-    | T
-    | {
-        Hero?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              image?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'Super-Hero'?:
-          | T
-          | {
-              IsSideBar?: T;
-              title?: T;
-              description?: T;
-              description_html?: T;
-              image?: T;
-              id?: T;
-              blockName?: T;
-            };
-        GaleriBlock?:
-          | T
-          | {
-              uploads?:
-                | T
-                | {
-                    uploadBlock?:
-                      | T
-                      | {
-                          image?: T;
-                          caption?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
   updatedAt?: T;
   createdAt?: T;
 }

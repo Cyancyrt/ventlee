@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import { RefreshRouteOnSave } from './RefreshRouteOnSave'
+import { RefreshRouteOnSave } from '../../Blog/[slug]/RefreshRouteOnSave'
 import Image from 'next/image'
 import { GetOneBlog } from '@/api/blogHook'
 
 import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
-import PostNextPrev from '../prevAndNextPost'
+import PostNextPrev from '../../Blog/prevAndNextPost'
 
 async function BlogPage({ params }) {
   const response = await GetOneBlog({ params })

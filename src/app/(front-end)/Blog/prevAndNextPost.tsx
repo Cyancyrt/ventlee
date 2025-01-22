@@ -4,7 +4,7 @@ async function PostNextPrev({ slug }) {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'post'
-  const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'post')
+  const posts = pageRes?.docs?.filter((doc) => doc?.contentType?.description === 'blog')
 
   // Find the current post
   const currentPostIndex = posts?.findIndex((post) => post.slug === slug)

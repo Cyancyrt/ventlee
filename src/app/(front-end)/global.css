@@ -27,3 +27,7 @@ main {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
 }
+.dropdown-menu {
+  max-height: 300px; /* Atur tinggi maksimum */
+  overflow-y: auto; /* Aktifkan scroll jika item banyak */
+}

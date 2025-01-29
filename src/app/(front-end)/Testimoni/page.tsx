@@ -7,7 +7,7 @@ async function TestimoniPage() {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'testimoni'
-  const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'testimoni')
+  const posts = pageRes?.docs?.filter((doc) => doc.contentType.description === 'testimoni')
 
   return (
     <div className="container mt-5">

@@ -26,9 +26,14 @@ const Navbar = async () => {
               .filter(
                 (category) =>
                   category?.description !== 'blog' && category?.description !== 'testimoni',
-              ) // Filter kategori, kecualikan 'blog'
+              ) // Filter kategori, kecualikan 'blog' dan 'testimoni'
               .map((category, index) => {
-                return (
+                // Filter artikel yang sesuai dengan kategori
+                const filteredBlogs = FetchBlog.docs.filter(
+                  (res) => res?.contentType?.description === category.description,
+                )
+
+                return filteredBlogs.length > 0 ? (
                   <li className="nav-item dropdown" key={index}>
                     <a
                       className="nav-link dropdown-toggle"
@@ -39,29 +44,31 @@ const Navbar = async () => {
                     >
                       {category.title}
                     </a>
-
                     <ul className="dropdown-menu">
-                      {FetchBlog.docs
-                        .filter((res) => res?.contentType?.description === category.description)
-                        .map((res, index) => {
-                          return (
-                            <li key={index}>
-                              <a
-                                className="dropdown-item"
-                                href={`/${res?.contentType?.title}/${res?.slug}`}
-                              >
-                                {res?.title}
-                              </a>
-                            </li>
-                          )
-                        })}
+                      {filteredBlogs.map((res, blogIndex) => (
+                        <li key={blogIndex}>
+                          <a
+                            className="dropdown-item"
+                            href={`/${res?.contentType?.title}/${res?.slug}`}
+                          >
+                            {res?.title}
+                          </a>
+                        </li>
+                      ))}
                     </ul>
+                  </li>
+                ) : (
+                  <li className="nav-item" key={index}>
+                    <a className="nav-link" href="#">
+                      {category.title}
+                    </a>
                   </li>
                 )
               })}
-            <li className="nav-item dropdown">
+
+            <li className={`nav-item ${FetchGaleri.docs.length > 0 ? 'dropdown' : ''}`}>
               <a
-                className="nav-link dropdown-toggle"
+                className={`nav-link ${FetchGaleri.docs.length > 0 ? 'dropdown-toggle' : ''} `}
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"

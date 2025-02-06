@@ -52,7 +52,6 @@ async function BlogPage({ params }) {
           </aside>
         )}
       </section>
-      <PostNextPrev slug={response?.slug} />
     </Fragment>
   )
 }

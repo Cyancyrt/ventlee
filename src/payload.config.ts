@@ -11,6 +11,8 @@ import { Media } from './collections/Media'
 import { Galeri } from './collections/Galeri'
 import { Post } from './collections/Post'
 import { Category } from './collections/Category'
+import { Footer } from './collections/Footer'
+import { FooterCategory } from './collections/FooterCategory'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Category, Galeri, Post],
+  collections: [Users, Media, Category, Galeri, Post, Footer, FooterCategory],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

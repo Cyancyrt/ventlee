@@ -16,6 +16,8 @@ export interface Config {
     category: Category;
     Galeri: Galeri;
     posts: Post;
+    footer: Footer;
+    FooterCategory: FooterCategory;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -27,6 +29,8 @@ export interface Config {
     category: CategorySelect<false> | CategorySelect<true>;
     Galeri: GaleriSelect<false> | GaleriSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    FooterCategory: FooterCategorySelect<false> | FooterCategorySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -219,6 +223,39 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  AddLayout?:
+    | {
+        footerCategory?: (number | null) | FooterCategory;
+        AddItem?:
+          | {
+              titleItem: string;
+              externalLink?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FooterCategory".
+ */
+export interface FooterCategory {
+  id: number;
+  title?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -243,6 +280,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'footer';
+        value: number | Footer;
+      } | null)
+    | ({
+        relationTo: 'FooterCategory';
+        value: number | FooterCategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -412,6 +457,37 @@ export interface PostsSelect<T extends boolean = true> {
       };
   createdAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  AddLayout?:
+    | T
+    | {
+        footerCategory?: T;
+        AddItem?:
+          | T
+          | {
+              titleItem?: T;
+              externalLink?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FooterCategory_select".
+ */
+export interface FooterCategorySelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

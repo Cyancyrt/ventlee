@@ -5,7 +5,10 @@ import { revalidatePage } from '@/component/hooks/revalidatePage'
 export const Category: CollectionConfig = {
   slug: 'category',
   access: {
+    create: () => true,
     read: () => true,
+    update: () => true,
+    delete: () => true,
   },
   hooks: {
     afterChange: [revalidatePage],
@@ -28,15 +31,15 @@ export const Category: CollectionConfig = {
     ],
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'image'],
+    hidden: true,
+    defaultColumns: ['title', 'slug'],
+    useAsTitle: 'title',
     livePreview: {
       url: ({ data }) => {
         const isHomePage = data.slug === 'home'
         return `${process.env.PAYLOAD_PUBLIC_SITE_URL}${!isHomePage ? `/About/${data.slug}` : ''}`
       },
     },
-
-    useAsTitle: 'title',
   },
 
   fields: [

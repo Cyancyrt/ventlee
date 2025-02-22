@@ -2,12 +2,12 @@ import React from 'react'
 import { GetAllGaleri } from '@/api/galeriHook'
 import { GetAllCategories } from '@/api/categoryHook'
 import { GetAllBlog } from '@/api/blogHook'
-const Navbar = async () => {
+export const TestNavbar = async () => {
   const FetchGaleri = await GetAllGaleri()
   const FetchBlog = await GetAllBlog()
   const fetchCategory = await GetAllCategories()
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="">
       <div className="container">
         <a className="navbar-brand" href={'/'}>
           Jas Mewah
@@ -117,4 +117,3 @@ const Navbar = async () => {
     </nav>
   )
 }
-export default Navbar

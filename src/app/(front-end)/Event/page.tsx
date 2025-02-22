@@ -8,7 +8,7 @@ async function TestimoniPage() {
 
   // Filter documents where contentType is 'testimoni'
   const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'testimoni')
-
+  console.log("test")
   return (
     <div className="container mt-5">
       <div className="row g-4">

@@ -227,6 +227,7 @@ export interface Post {
  */
 export interface Footer {
   id: number;
+  sectionType: 'social_media' | 'useful_links';
   AddLayout?:
     | {
         footerCategory?: (number | null) | FooterCategory;
@@ -463,6 +464,7 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  sectionType?: T;
   AddLayout?:
     | T
     | {

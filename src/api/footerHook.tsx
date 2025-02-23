@@ -11,5 +11,5 @@ export async function GetAllFooter() {
   if (pageRes === null) {
     return notFound()
   }
-  return pageRes.docs[0]
+  return pageRes.docs
 }

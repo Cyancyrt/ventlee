@@ -4,12 +4,14 @@ import { Super_Hero } from '@/block/SuperHero'
 import generateExcerpt from '@/component/hooks/formatExcerpt'
 import { generateSlug } from '@/component/hooks/formatSlug'
 import { revalidatePage } from '@/component/hooks/revalidatePage'
+
 import {
   FixedToolbarFeature,
   HTMLConverterFeature,
   lexicalEditor,
   lexicalHTML,
   LinkFeature,
+  UploadFeature,
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
 
@@ -21,7 +23,8 @@ export const Post: CollectionConfig = {
   hooks: {
     afterChange: [revalidatePage],
     beforeChange: [
-      ({ data, originalDoc }) => {
+      async ({ data, originalDoc, req }) => {
+        const payload = req.payload
         if (data) {
           if (!data.title) {
             data.title = ''
@@ -35,6 +38,7 @@ export const Post: CollectionConfig = {
           let excerpt = data?.description[0]?.children[0].text
           data.excerpt = generateExcerpt(excerpt) // Buat slug otomatis dari title yang baru
         }
+
         return data
       },
     ],
@@ -123,6 +127,7 @@ export const Post: CollectionConfig = {
         features: ({ defaultFeatures, rootFeatures }) => [
           ...defaultFeatures,
           FixedToolbarFeature(),
+          UploadFeature(),
           LinkFeature({
             // Example showing how to customize the built-in fields
             // of the Link feature

@@ -1,23 +1,10 @@
 import { GetAllFooter } from 'src/api/footerHook'
 export default async function Footer() {
-  // const PageRes = await GetAllFooter()
-  // const footer = PageRes?.AddLayout?.map((res) => {
-  //   let title = res?.footerCategory?.title
-  //   return (
-  //     <div key={res.footerCategory?.id} className="col-md-3">
-  //       <h6 className="fw-bold">{title}</h6>
-  //       <ul className="list-unstyled">
-  //         {res.AddItem.map((res2) => (
-  //           <li key={res2.id}>
-  //             <a href={res2.externalLink} target="_blank" rel="noopener noreferrer">
-  //               {res2.titleItem}
-  //             </a>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   )
-  // })
+  const PageRes = await GetAllFooter()
+  const usefulLinks = PageRes.filter((res) => res.sectionType === 'useful_links')
+
+  // Memisahkan elemen dengan sectionType 'social_media'
+  const socialMedia = PageRes.filter((res) => res.sectionType === 'social_media')
   return (
     <>
       {/* Pembatas*/}
@@ -38,6 +25,23 @@ export default async function Footer() {
         {/* Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Dior Boutiques */}
+          {usefulLinks[0]?.AddLayout?.map((res) => {
+            const title = res.footerCategory?.title
+            return (
+              <div key={res.footerCategory?.id}>
+                <h4 className="font-semibold mb-4">{title}</h4>
+                <ul className="space-y-2">
+                  {res.AddItem.map((res2) => (
+                    <li key={res2.id}>
+                      <a href={res2.externalLink} target="_blank" rel="noopener noreferrer">
+                        {res2.titleItem}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
           <div>
             <h4 className="font-semibold mb-4">Dior Boutiques</h4>
             <ul className="space-y-2">
@@ -46,42 +50,47 @@ export default async function Footer() {
             </ul>
           </div>
           {/* Client Services */}
-          <div>
+          {/* <div>
             <h4 className="font-semibold mb-4">Client Services</h4>
             <ul className="space-y-2">
               <li>Contact</li>
               <li>FAQ</li>
             </ul>
-          </div>
+          </div> */}
           {/* The House of Dior */}
-          <div>
+          {/* <div>
             <h4 className="font-semibold mb-4">The House Of Dior</h4>
             <ul className="space-y-2">
               <li>Dior Sustainability</li>
               <li>Ethics &amp; Compliance</li>
               <li>Careers</li>
-            </ul>
-          </div>
+            </ul> */}
+          {/* </div> */}
           {/* Legal Terms */}
-          <div>
+          {/* <div>
             <h4 className="font-semibold mb-4">Legal Terms</h4>
             <ul className="space-y-2">
               <li>Legal Terms</li>
               <li>Privacy Notice</li>
               <li>Sitemap</li>
-            </ul>
-          </div>
+            </ul> */}
+          {/* </div> */}
         </div>
         {/* Sosmed, Bahasa */}
         <div className="flex justify-between items-center mt-12 pt-8 border-t">
           <div className="flex gap-4">
             <span>Follow Us</span>
-            <a href="#">Tiktok</a>
+            {socialMedia[0]?.AddLayout[0]?.AddItem.map((res, index) => (
+              <a key={index} href={res.externalLink} target="_blank" rel="noopener noreferrer">
+                {res.titleItem}
+              </a>
+            ))}
+            {/* <a href="#">Tiktok</a>
             <a href="#">Instagram</a>
             <a href="#">X</a>
             <a href="#">Facebook</a>
             <a href="#">Pinterest</a>
-            <a href="#">LinkedIn</a>
+            <a href="#">LinkedIn</a> */}
           </div>
           <div>
             <select className="border p-2">

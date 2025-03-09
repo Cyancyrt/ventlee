@@ -1,6 +1,7 @@
-import GaleriPageInner from './innerPage'
 import { notFound } from 'next/navigation'
 import { GetOneGaleri } from '@/api/galeriHook'
+import { FeaturedImageGallery } from '../../Gallery'
+
 
 const GaleriPage = async ({ params }) => {
   const pageRes = await GetOneGaleri({ params })
@@ -21,6 +22,8 @@ const GaleriPage = async ({ params }) => {
 
 const Gallery = ({ images }) => {
   return (<>
+
+  <FeaturedImageGallery/>
     {/*Bagian Background*/}
     <div className="relative h-[80vh]">
       <img

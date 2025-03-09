@@ -94,7 +94,7 @@ export default function SidebarMenu({ routes }) {
                 <ul className="mt-2 space-y-1 pl-6">
                   {events.map(event => (
                     <li key={event.id} className="py-2 pl-3 rounded-lg bg-gray-50 hover:bg-gray-200 transition">
-                      <a href={`/${event.slug}`} className="text-gray-700 hover:text-gray-900">
+                      <a href={`event/${event.slug}`} className="text-gray-700 hover:text-gray-900">
                         {event.title}
                       </a>
                     </li>
@@ -133,7 +133,7 @@ export default function SidebarMenu({ routes }) {
                 <ul className="mt-2 space-y-1 pl-6">
                   {galleries.map(item => (
                     <li key={item.id} className="py-2 pl-3 rounded-lg bg-gray-50 hover:bg-gray-200 transition">
-                      <a href={`/Galeri/${item.slug}`} className="text-gray-700 hover:text-gray-900">
+                      <a href={`/galeri/${item.slug}`} className="text-gray-700 hover:text-gray-900">
                         {item.title}
                       </a>
                     </li>

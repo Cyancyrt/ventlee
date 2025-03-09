@@ -3,6 +3,7 @@ import Image from "next/image";
 import SidebarMenu from "./Sidebar";
 import { GetAllBlog } from "@/api/blogHook";
 import { GetAllCategories } from "@/api/CategoryHook";
+import Link from "next/link";
 
 export default async function Navbar() {
   const [galleries, categories, blogs] = await Promise.all([
@@ -55,18 +56,16 @@ export default async function Navbar() {
 
         {/* Desktop Navbar */}
         <div className="hidden lg:flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
           <SidebarMenu routes={{
             galleries: galleries?.docs || [],
             categories: categories?.docs || [],
             blogs: blogs?.docs || [],
           }}/>
-
-            <button className="text-gray-700 focus:outline-none">Cari</button>
           </div>
-          <span className="text-lg font-bold">
+          <Link href={"/"} className="text-lg font-bold">
             <Image src={"/logo.png"} width={150} height={100} alt="a" />
-          </span>
+          </Link>
           <div className="flex items-center space-x-4">
             <button className="text-gray-700 focus:outline-none">
               Hubungi Kami

@@ -1,9 +1,10 @@
 import GaleriBlock from '@/block/GaleriBlock'
 import { Hero } from '@/block/Hero'
 import { Super_Hero } from '@/block/SuperHero'
-import generateExcerpt from '@/component/hooks/formatExcerpt'
+import generateExcerpt, { GetHeaderText } from '@/component/hooks/formatExcerpt'
 import { generateSlug } from '@/component/hooks/formatSlug'
 import { revalidatePage } from '@/component/hooks/revalidatePage'
+import { HTMLCONVERT } from '@/component/hooks/serialize'
 
 import {
   FixedToolbarFeature,
@@ -35,7 +36,8 @@ export const Post: CollectionConfig = {
           data.slug = generateSlug(data.title) // Buat slug otomatis dari title yang baru
         }
         if (data?.description && data?.description !== originalDoc?.description) {
-          let excerpt = data?.description[0]?.children[0].text
+          let excerpt = GetHeaderText(data.description?.root?.children.slice(0, 5))
+
           data.excerpt = generateExcerpt(excerpt) // Buat slug otomatis dari title yang baru
         }
 

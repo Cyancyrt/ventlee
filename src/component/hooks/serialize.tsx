@@ -2,9 +2,6 @@ import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import type { SerializedLexicalNode } from './types'
 
-import { TextFormatType } from '@payloadcms/richtext-lexical/lexical'
-import { text } from 'stream/consumers'
-
 export function getLastUpdated(updatedAt: string | undefined): string {
   if (!updatedAt) return 'Tanggal tidak tersedia'
 

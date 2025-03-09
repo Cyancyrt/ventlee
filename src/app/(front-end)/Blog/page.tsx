@@ -47,10 +47,7 @@ export default async function BlogPage() {
                 >
                   {post.title}
                 </a>
-                <div
-                  className="text-gray-600 mb-3"
-                  dangerouslySetInnerHTML={{ __html: post.description_html }}
-                ></div>
+                <div className="text-gray-600 mb-3">{post.excerpt}</div>
                 <a
                   href={`Blog/${post.slug}`}
                   className="text-black hover:text-gray-600 inline-flex items-center"

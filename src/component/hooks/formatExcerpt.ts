@@ -5,22 +5,35 @@
  * @param {number} wordLimit - The number of words for the excerpt.
  * @returns {string} The generated excerpt.
  */
-const generateExcerpt = (content, wordLimit = 25) => {
-  if (!content) return ''
+export const GetHeaderText = (content) => {
+  // console.log(content)
+  // console.log(typeof content)
+  return content?.map((node, index): JSX.Element | null => {
+    const serializedChildrenFn = (node: SerializedLexicalNode): string | null => {
+      if (!node.children || node.children.length === 0) {
+        return null
+      }
 
-  // Split content into paragraphs (assuming paragraphs are separated by \n or double newlines).
-  const paragraphs = content.split(/\n\n|\n/).filter((p) => p.trim() !== '')
-  if (paragraphs.length === 0) return ''
+      // Gabungkan semua teks dalam children
+      return node.children.map((child) => child.text).join(' ')
+    }
+    const serializedChildren = serializedChildrenFn(node)
+    return serializedChildren
+  })
+}
+const generateExcerpt = (content, wordLimit = 35) => {
+  if (!content || content.length === 0) return ''
 
-  // Use the first paragraph.
-  const firstParagraph = paragraphs[0]
+  // Gabungkan semua teks dalam array menjadi satu string
+  const contentString = content.join(' ')
 
-  // Extract words and limit to the specified word count.
-  const words = firstParagraph.split(/\s+/)
+  // Pisahkan string berdasarkan spasi untuk mendapatkan kata-kata
+  const words = contentString.split(/\s+/)
+
+  // Ambil sejumlah kata berdasarkan wordLimit
   const excerpt = words.slice(0, wordLimit).join(' ')
 
-  // Add ellipsis if content is longer than the word limit.
+  // Tambahkan "..." di akhir jika jumlah kata lebih dari wordLimit
   return words.length > wordLimit ? `${excerpt}...` : excerpt
 }
-
 export default generateExcerpt

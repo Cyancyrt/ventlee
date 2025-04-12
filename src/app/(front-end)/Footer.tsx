@@ -1,10 +1,11 @@
 import { GetAllFooter } from 'src/api/footerHook'
+import { FooterCategory } from './config'
 export default async function Footer() {
   const PageRes = await GetAllFooter()
-  const usefulLinks = PageRes.filter((res) => res.sectionType === 'useful_links')
+  const usefulLinks = PageRes.filter((res) => res.sectionType === FooterCategory.LINKS)
 
   // Memisahkan elemen dengan sectionType 'social_media'
-  const socialMedia = PageRes.filter((res) => res.sectionType === 'social_media')
+  const socialMedia = PageRes.filter((res) => res.sectionType === FooterCategory.SOCIAL_MEDIA)
   return (
     <>
       {/* Pembatas*/}

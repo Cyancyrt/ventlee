@@ -1,8 +1,9 @@
 import { GetAllBlog } from '@/api/blogHook'
-
+import { CATEGORY } from '../config'
+import Image from 'next/image'
 export default async function BlogPage() {
   const pageRes = await GetAllBlog()
-  const posts = pageRes?.docs?.filter((doc) => doc?.contentType?.description === 'blog') || []
+  const posts = pageRes?.docs?.filter((doc) => doc?.contentType?.description === CATEGORY.BLOG) || []
 
   const chunkArray = (arr, size) => {
     return arr.reduce((acc, _, i) => {
@@ -14,7 +15,7 @@ export default async function BlogPage() {
   return (
     <>
       <div className="relative h-[80vh]">
-        <img
+        <Image
           src={posts[0]?.image?.url || 'list-aset/article.jpeg'}
           alt="background"
           className="w-full h-full object-cover"
@@ -33,8 +34,8 @@ export default async function BlogPage() {
           >
             {row.map((post, postIndex) => (
               <div key={postIndex} className="flex flex-col">
-                <a href={`article/${post.slug}.html`} className="relative group mb-4">
-                  <img
+                <a href={`article/${post.slug}`} className="relative group mb-4">
+                  <Image
                     src={post.image?.url || `list-aset/list-${rowIndex * 2 + postIndex + 1}.jpeg`}
                     alt={post.title}
                     className="w-full aspect-video object-cover"
@@ -42,14 +43,14 @@ export default async function BlogPage() {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
                 </a>
                 <a
-                  href={`Blog/${post.slug}`}
+                  href={`blog/${post.slug}`}
                   className="text-xl font-medium mb-3 hover:text-gray-600"
                 >
                   {post.title}
                 </a>
                 <div className="text-gray-600 mb-3">{post.excerpt}</div>
                 <a
-                  href={`Blog/${post.slug}`}
+                  href={`blog/${post.slug}`}
                   className="text-black hover:text-gray-600 inline-flex items-center"
                 >
                   DISCOVER MORE &gt;

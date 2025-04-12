@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound } from 'next/navigation'
+import { CATEGORY } from '@/app/(front-end)/config'
 
 export async function GetAllBlog() {
   const payload = await getPayload({ config })
@@ -15,8 +16,7 @@ export async function GetAllBlog() {
   }
   return pageRes
 }
-
-export async function GetOneBlog({ params }) {
+export async function GetOneBlog({ params }: { params: { slug: string } }) {
   const payload = await getPayload({ config })
   const { slug } = await params
 
@@ -32,7 +32,12 @@ export async function GetOneBlog({ params }) {
   })
 
   // Check if the document exists and has the correct content type
-  const post = pageRes.docs.find((doc) => doc?.contentType?.description === 'blog')
+  const post = pageRes.docs.find(
+    (doc) =>
+      typeof doc?.contentType === 'object' &&
+      doc.contentType?.description === CATEGORY.BLOG
+  )
+  
 
   if (post) {
     return post // Return the post if contentype is 'post'
@@ -40,7 +45,7 @@ export async function GetOneBlog({ params }) {
     return notFound() // Return 404 if not found or invalid content type
   }
 }
-export async function GetOneTestimoni({ params }) {
+export async function GetOneTestimoni({ params } : { params: { slug: string } }) {
   const payload = await getPayload({ config })
   const { slug } = await params
 
@@ -56,7 +61,11 @@ export async function GetOneTestimoni({ params }) {
   })
 
   // Check if the document exists and has the correct content type
-  const post = pageRes.docs.find((doc) => doc?.contentType?.description === 'testimoni')
+  const post = pageRes.docs.find(
+    (doc) =>
+      typeof doc?.contentType === 'object' &&
+      doc.contentType?.description === CATEGORY.TESTIMONI
+  )
 
   if (post) {
     return post // Return the post if contentype is 'post'
@@ -64,7 +73,7 @@ export async function GetOneTestimoni({ params }) {
     return notFound() // Return 404 if not found or invalid content type
   }
 }
-export async function GetOneAbout({ params }) {
+export async function GetOneAbout({ params } : { params: { slug: string } }) {
   const payload = await getPayload({ config })
   const { slug } = await params
 
@@ -80,7 +89,11 @@ export async function GetOneAbout({ params }) {
   })
 
   // Check if the document exists and has the correct content type
-  const post = pageRes.docs.find((doc) => doc?.contentType?.description === 'about')
+  const post = pageRes.docs.find(
+    (doc) =>
+      typeof doc?.contentType === 'object' &&
+      doc.contentType?.description === CATEGORY.ABOUT
+  )
 
   if (post) {
     return post // Return the post if contentype is 'post'
@@ -88,7 +101,7 @@ export async function GetOneAbout({ params }) {
     return notFound() // Return 404 if not found or invalid content type
   }
 }
-export async function GetOneEvent({ params }) {
+export async function GetOneEvent({ params }: { params: { slug: string } }) {
   const payload = await getPayload({ config })
   const { slug } = await params
 
@@ -104,7 +117,11 @@ export async function GetOneEvent({ params }) {
   })
 
   // Check if the document exists and has the correct content type
-  const post = pageRes.docs.find((doc) => doc?.contentType?.description === 'event')
+  const post = pageRes.docs.find(
+    (doc) =>
+      typeof doc?.contentType === 'object' &&
+      doc.contentType?.description === CATEGORY.EVENT
+  )
 
   if (post) {
     return post // Return the post if contentype is 'post'

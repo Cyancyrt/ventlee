@@ -22,7 +22,7 @@ async function BlogPage({ params }) {
         {/* Main Content Area */}
         <div style={{ flex: layout?.some((block) => block.isSideBar) ? '3' : '1' }}>
           <div className="relative h-[80vh]">
-            <img
+            <Image
               src={HeaderImage(response)}
               alt="background"
               className="w-full h-full object-cover brightness-75"

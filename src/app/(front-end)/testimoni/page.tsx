@@ -1,13 +1,15 @@
 import { GetAllBlog } from '@/api/blogHook'
-import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
+import { HTMLCONVERT, BlockSerializer } from '@/component/hooks/serialize'
 import { getLastUpdated } from '@/component/hooks/serialize'
 import React from 'react'
+import { CATEGORY } from '../config'
+import Image from 'next/image'
 
 async function TestimoniPage() {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'testimoni'
-  const posts = pageRes?.docs?.filter((doc) => doc.contentType.description === 'testimoni')
+  const posts = pageRes?.docs?.filter((doc) => doc.contentType.description === CATEGORY.TESTIMONI)
 
   return (
     <div className="container mt-5">
@@ -25,7 +27,7 @@ async function TestimoniPage() {
                   <div className="row g-0">
                     <div className="col-md-4">
                       {imageHeader && (
-                        <img
+                        <Image
                           src={imageHeader?.url}
                           className="img-fluid rounded-start"
                           alt={imageHeader?.alt || 'Image'}
@@ -36,7 +38,7 @@ async function TestimoniPage() {
                       <div className="card-body">
                         <h5 className="card-title">{res?.title}</h5>
                         <div className="card-text">
-                          <HtmlRenderer htmlString={res?.description_html} />
+                          <HTMLCONVERT nodes={res?.description?.root?.children}  />
                         </div>
                         <p className="card-text">
                           <small className="text-body-secondary">
@@ -65,7 +67,7 @@ async function TestimoniPage() {
                       (block, index) =>
                         block.IsSideBar && (
                           <div key={index}>
-                            <TextSerial nodes={[block]} />
+                            <BlockSerializer nodes={[block]} />
                           </div>
                         ),
                     )}

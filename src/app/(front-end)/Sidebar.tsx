@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { ROUTES,CATEGORY } from "./config";
 
 export default function SidebarMenu({ routes }) {
   const { galleries, categories, blogs } = routes;
@@ -12,8 +13,8 @@ export default function SidebarMenu({ routes }) {
     setIsOpen(!isOpen);
   };
 
-  const events = blogs.filter(item => item.contentType.slug === 'event');
-  const filteredCategories = categories.filter(item => item.slug !== 'event');
+  const events = blogs.filter(item => item.contentType.slug === CATEGORY.EVENT);
+  const filteredCategories = categories.filter(item => item.slug !== CATEGORY.EVENT);
 
   return (
     <>
@@ -94,7 +95,7 @@ export default function SidebarMenu({ routes }) {
                 <ul className="mt-2 space-y-1 pl-6">
                   {events.map(event => (
                     <li key={event.id} className="py-2 pl-3 rounded-lg bg-gray-50 hover:bg-gray-200 transition">
-                      <a href={`event/${event.slug}`} className="text-gray-700 hover:text-gray-900">
+                      <a href={`${ROUTES.EVENT}/${event.slug}`} className="text-gray-700 hover:text-gray-900">
                         {event.title}
                       </a>
                     </li>
@@ -133,7 +134,7 @@ export default function SidebarMenu({ routes }) {
                 <ul className="mt-2 space-y-1 pl-6">
                   {galleries.map(item => (
                     <li key={item.id} className="py-2 pl-3 rounded-lg bg-gray-50 hover:bg-gray-200 transition">
-                      <a href={`/galeri/${item.slug}`} className="text-gray-700 hover:text-gray-900">
+                      <a href={`${ROUTES.GALLERY}/${item.slug}`} className="text-gray-700 hover:text-gray-900">
                         {item.title}
                       </a>
                     </li>

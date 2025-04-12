@@ -3,8 +3,7 @@ import { RefreshRouteOnSave } from '../../blog/[slug]/RefreshRouteOnSave'
 import Image from 'next/image'
 import { GetOneAbout } from '@/api/blogHook'
 
-import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
-import PostNextPrev from '../../blog/prevAndNextPost'
+import { HTMLCONVERT, BlockSerializer } from '@/component/hooks/serialize'
 
 async function BlogPage({ params }) {
   const response = await GetOneAbout({ params })
@@ -22,7 +21,7 @@ async function BlogPage({ params }) {
         {/* Main Content Area */}
         <div style={{ flex: layout?.some((block) => block.isSideBar) ? '3' : '1' }}>
           <h2>{response?.title}</h2>
-          <HtmlRenderer htmlString={response?.description_html} />
+          <HTMLCONVERT node={response?.description?.root?.children} />
           {response?.image && (
             <Image src={response?.image?.url} alt={response?.image?.alt} width={400} height={500} />
           )}
@@ -31,7 +30,7 @@ async function BlogPage({ params }) {
               (block, index) =>
                 !block?.IsSideBar && ( // Render only non-sidebar blocks in main content
                   <div key={index}>
-                    <TextSerial nodes={[block]} />
+                    <BlockSerializer nodes={[block]} />
                   </div>
                 ),
             )}
@@ -45,7 +44,7 @@ async function BlogPage({ params }) {
               (block, index) =>
                 block.IsSideBar && ( // Render only sidebar blocks here
                   <div key={index}>
-                    <TextSerial nodes={[block]} />
+                    <BlockSerializer nodes={[block]} />
                   </div>
                 ),
             )}

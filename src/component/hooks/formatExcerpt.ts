@@ -6,8 +6,7 @@
  * @returns {string} The generated excerpt.
  */
 export const GetHeaderText = (content) => {
-  // console.log(content)
-  // console.log(typeof content)
+
   return content?.map((node, index): JSX.Element | null => {
     const serializedChildrenFn = (node: SerializedLexicalNode): string | null => {
       if (!node.children || node.children.length === 0) {

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import type { SerializedLexicalNode } from './types'
+import Image from 'next/image'
+
 
 export function getLastUpdated(updatedAt: string | undefined): string {
   if (!updatedAt) return 'Tanggal tidak tersedia'
@@ -74,7 +76,7 @@ export const HTMLCONVERT = ({ nodes }: { nodes?: Props }) => {
   }
   return nodes?.map((node, index): JSX.Element | null => {
     if (node.type === 'upload') {
-      let image = <img src={node?.value?.url} alt={node?.value?.alt} />
+      let image = <Image src={node?.value?.url} alt={node?.value?.alt} />
       return image
     }
     if (node.type === 'text') {
@@ -269,7 +271,7 @@ export function BlockSerializer({ nodes }: { nodes?: any[] }) {
             <section key={index} className="hero">
               <h1>{node.title}</h1>
               <p>{node.subtitle}</p>
-              {node.image && <img src={node.image} alt={node.alt || 'Hero Image'} />}
+              {node.image && <Image src={node.image} alt={node.alt || 'Hero Image'} />}
             </section>
           )
 
@@ -290,7 +292,7 @@ export function BlockSerializer({ nodes }: { nodes?: any[] }) {
                     return (
                       <div key={idx} className="galeri-item">
                         {image && (
-                          <img
+                          <Image
                             src={image.url}
                             alt={image.alt || `Gallery Item ${idx + 1}`}
                             className="rounded"

@@ -1,10 +1,11 @@
 import { GetAllBlog } from '@/api/blogHook'
+import { CATEGORY,ROUTES } from '../config'
 
 async function PostNextPrev({ slug }) {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'post'
-  const posts = pageRes?.docs?.filter((doc) => doc?.contentType?.description === 'blog')
+  const posts = pageRes?.docs?.filter((doc) => doc?.contentType?.description === CATEGORY.BLOG)
 
   // Find the current post
   const currentPostIndex = posts?.findIndex((post) => post.slug === slug)
@@ -19,14 +20,14 @@ async function PostNextPrev({ slug }) {
       <div className="d-flex justify-content-between mt-3">
         <div className="d-flex justify-content-start">
           {prevPost && (
-            <a href={`/Blog/${prevPost.slug}`} className="btn btn-secondary me-3">
+            <a href={`${ROUTES.BLOG}/${prevPost.slug}`} className="btn btn-secondary me-3">
               Previous Post: {prevPost?.title}
             </a>
           )}
         </div>
         <div className="d-flex justify-content-end">
           {nextPost && (
-            <a href={`/Blog/${nextPost.slug}`} className="btn btn-secondary ms-3">
+            <a href={`${ROUTES.BLOG}/${nextPost.slug}`} className="btn btn-secondary ms-3">
               Next Post: {nextPost?.title}
             </a>
           )}

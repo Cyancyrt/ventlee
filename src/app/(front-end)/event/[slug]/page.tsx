@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import Image from 'next/image'
-import { GetOneEvent, GetOneTestimoni } from '@/api/blogHook'
+import { GetOneEvent } from '@/api/blogHook'
 
 import { HTMLCONVERT, BlockSerializer } from '@/component/hooks/serialize'
 
@@ -19,7 +19,7 @@ async function BlogPage({ params }) {
         style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}
       >
         {/* Main Content Area */}
-        <div style={{ flex: layout?.some((block) => block.isSideBar) ? '3' : '1' }}>
+        <div style={{ flex: layout?.some((block) => block?.isSideBar) ? '3' : '1' }}>
           <h2>{response?.title}</h2>
           <HTMLCONVERT nodes={response?.description?.root?.children} />
           {response?.image && (

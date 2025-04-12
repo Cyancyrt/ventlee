@@ -30,7 +30,7 @@ async function BlogPage({ params }) {
               (block, index) =>
                 !block?.IsSideBar && ( // Render only non-sidebar blocks in main content
                   <div key={index}>
-                    <TextSerial nodes={[block]} />
+                    <BlockSerializer nodes={[block]} />
                   </div>
                 ),
             )}

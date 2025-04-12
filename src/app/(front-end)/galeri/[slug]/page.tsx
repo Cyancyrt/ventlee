@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { GetOneGaleri } from '@/api/galeriHook'
 import { FeaturedImageGallery } from '../../Gallery'
+import Image from 'next/image'
+
 
 
 const GaleriPage = async ({ params }) => {
@@ -26,7 +28,7 @@ const Gallery = ({ images }) => {
   <FeaturedImageGallery/>
     {/*Bagian Background*/}
     <div className="relative h-[80vh]">
-      <img
+      <Image
         src="/card-aset/suits.jpg"
         alt="background"
         className="w-full h-full object-cover"
@@ -35,7 +37,7 @@ const Gallery = ({ images }) => {
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <h1 className="text-white text-3xl font-bold mb-4">SUITS</h1>
         <p className="text-white text-center max-w-5xl px-4 line-clamp-2">
-          Corneliani men's suits are sartorial classics with refined styles and
+          Corneliani men &apos; s suits are sartorial classics with refined styles and
           relaxed constructions. The Made in Italy style and quality is firmly yet
           fluidly expressed in the suits, refined even further by the quality of
           the fabrics used. Perfect for pairing with classic shirts and fine
@@ -53,13 +55,13 @@ const Gallery = ({ images }) => {
               <div className="relative w-full aspect-[3/4] overflow-hidden">
                 {/* Main Image */}
                 <a href="#" className="block w-full h-full">
-                  <img
+                  <Image
                     src={image?.uploadBlock.image.url}
                     alt="product-1"
                     className="absolute inset-0 w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
                   />
                   {/* Hover Image */}
-                  <img
+                  <Image
                     src="/card-aset/hover-1.jpg"
                     alt="product-1-hover"
                     className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"

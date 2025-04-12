@@ -1,14 +1,16 @@
 import { GetAllBlog } from '@/api/blogHook'
-import { HtmlRenderer, TextSerial } from '@/component/hooks/serialize'
+import { BlockSerializer, HTMLCONVERT } from '@/component/hooks/serialize'
 import { getLastUpdated } from '@/component/hooks/serialize'
+import { CATEGORY } from '../config'
 import React from 'react'
+import Image from 'next/image'
 
-async function TestimoniPage() {
+
+async function EventPage() {
   const pageRes = await GetAllBlog()
 
   // Filter documents where contentType is 'testimoni'
-  const posts = pageRes?.docs?.filter((doc) => doc.contentType === 'testimoni')
-  console.log("test")
+  const posts = pageRes?.docs?.filter((doc) => doc.contentType === CATEGORY.EVENT)
   return (
     <div className="container mt-5">
       <div className="row g-4">
@@ -25,7 +27,7 @@ async function TestimoniPage() {
                   <div className="row g-0">
                     <div className="col-md-4">
                       {imageHeader && (
-                        <img
+                        <Image
                           src={imageHeader?.url}
                           className="img-fluid rounded-start"
                           alt={imageHeader?.alt || 'Image'}
@@ -35,8 +37,8 @@ async function TestimoniPage() {
                     <div className="col-md-8">
                       <div className="card-body">
                         <h5 className="card-title">{res?.title}</h5>
-                        <div className="card-text">
-                          <HtmlRenderer htmlString={res?.description_html} />
+                        <div className="card-text overflow-hidden">
+                          <HTMLCONVERT nodes={res?.description?.root?.children} />
                         </div>
                         <p className="card-text">
                           <small className="text-body-secondary">
@@ -65,7 +67,7 @@ async function TestimoniPage() {
                       (block, index) =>
                         block.IsSideBar && (
                           <div key={index}>
-                            <TextSerial nodes={[block]} />
+                            <BlockSerializer nodes={[block]} />
                           </div>
                         ),
                     )}
@@ -80,4 +82,4 @@ async function TestimoniPage() {
   )
 }
 
-export default TestimoniPage
+export default EventPage

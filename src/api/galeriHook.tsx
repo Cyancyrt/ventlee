@@ -17,7 +17,7 @@ export async function GetAllGaleri() {
   return pageRes
 }
 
-export async function GetOneGaleri({ params }) {
+export async function GetOneGaleri({ params }: { params: { slug: string } }) {
   const payload = await getPayload({ config })
   const { slug } = await params
 
